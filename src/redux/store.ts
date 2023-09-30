@@ -4,6 +4,7 @@ import albumsReducer from "./albumsSlice";
 import photosReducer from "./photosSlice";
 import { watchFetchAlbums } from "../sagas/albumsSaga";
 import { watchFetchPhotos } from "../sagas/photosSaga";
+import thunk from "redux-thunk";
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -12,7 +13,7 @@ const store = configureStore({
     albums: albumsReducer,
     photos: photosReducer,
   },
-  middleware: [sagaMiddleware],
+  middleware: [thunk, sagaMiddleware],
 });
 
 sagaMiddleware.run(watchFetchAlbums);
