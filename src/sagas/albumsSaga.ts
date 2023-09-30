@@ -2,7 +2,7 @@ import { put, takeLatest, call } from "redux-saga/effects";
 import axios from "axios";
 import { setAlbums, Album } from "../redux/albumsSlice";
 
-function* fetchAlbums() {
+export function* fetchAlbums() {
   try {
     const response: Album[] = yield call(
       axios.get,

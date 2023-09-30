@@ -2,7 +2,7 @@ import { put, takeLatest, call } from "redux-saga/effects";
 import axios from "axios";
 import { setPhotos, Photo } from "../redux/photosSlice";
 
-function* fetchPhotos(action: any) {
+export function* fetchPhotos(action: any) {
   const { albumId } = action.payload;
   try {
     const response: Photo[] = yield call(
