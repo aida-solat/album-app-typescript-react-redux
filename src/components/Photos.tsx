@@ -1,26 +1,32 @@
-// src/components/Photos.tsx
 import React, { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { RootState } from "../redux/store";
-import { setPhotos } from "../redux/photosSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import { fetchPhotosRequest } from "../actions/photoActions";
 
-const Photos: React.FC = () => {
-  const photos = useSelector((state: RootState) => state.photos);
+const Photo: React.FC = () => {
+  const { albumId } = useParams<{ albumId: string }>();
   const dispatch = useDispatch();
+  const { data, loading, error } = useSelector((state: any) => state.photos);
 
   useEffect(() => {
-    // Fetch photos based on albumId
-    dispatch(setPhotos);
-  }, [dispatch]);
+    dispatch(fetchPhotosRequest(Number(albumId)));
+  }, [dispatch, albumId]);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  }
 
   return (
-    <div className='p-4'>
-      <h1 className='text-2xl font-semibold mb-4'>Photos</h1>
+    <div>
+      <h1>Photos for Album {albumId}</h1>
       <div className='grid grid-cols-3 gap-4'>
-        {photos.map((photo) => (
-          <div key={photo.id} className='bg-gray-200 p-4'>
+        {data.map((photo: any) => (
+          <div key={photo.id}>
             <img src={photo.thumbnailUrl} alt={photo.title} />
-            <p className='mt-2'>{photo.title}</p>
           </div>
         ))}
       </div>
@@ -28,4 +34,4 @@ const Photos: React.FC = () => {
   );
 };
 
-export default Photos;
+export default Photo;
