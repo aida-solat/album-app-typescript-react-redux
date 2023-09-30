@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-interface Album {
+export interface Album {
   userId: number;
   id: number;
   title: string;
