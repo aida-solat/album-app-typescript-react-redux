@@ -2,8 +2,8 @@ import { configureStore } from "@reduxjs/toolkit";
 import createSagaMiddleware from "redux-saga";
 import albumsReducer from "./albumsSlice";
 import photosReducer from "./photosSlice";
-import { watchFetchAlbums } from "../sagas/albumsSaga";
-import { watchFetchPhotos } from "../sagas/photosSaga";
+import { watchFetchAlbums } from "../sagas/albumSaga";
+import { watchFetchPhotos } from "../sagas/photoSaga";
 import thunk from "redux-thunk";
 
 const sagaMiddleware = createSagaMiddleware();
