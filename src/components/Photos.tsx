@@ -14,16 +14,16 @@ const Photos: React.FC = () => {
   }, [dispatch]);
 
   return (
-    <div>
-      {photos.map((photo: any) => {
-        return (
-          <div key={photo.id}>
-            <h2>{photo.title}</h2>
-            <img src={photo.url} alt={photo.title} />
-            <p>{photo.thumbnailUrl}</p>
+    <div className='p-4'>
+      <h1 className='text-2xl font-semibold mb-4'>Photos</h1>
+      <div className='grid grid-cols-3 gap-4'>
+        {photos.map((photo) => (
+          <div key={photo.id} className='bg-gray-200 p-4'>
+            <img src={photo.thumbnailUrl} alt={photo.title} />
+            <p className='mt-2'>{photo.title}</p>
           </div>
-        );
-      })}
+        ))}
+      </div>
     </div>
   );
 };
