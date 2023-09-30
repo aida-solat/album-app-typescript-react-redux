@@ -1,28 +1,37 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createReducer } from "@reduxjs/toolkit";
+import {
+  fetchAlbumsRequest,
+  fetchAlbumsSuccess,
+  fetchAlbumsFailure,
+} from "../actions/albumActions";
+import { Album } from "../types";
 
-const albumSlice = createSlice({
-  name: "albums",
-  initialState: {
-    data: [],
-    loading: false,
-    error: null,
-  },
-  reducers: {
-    fetchAlbumsRequest: (state) => {
+interface AlbumState {
+  data: Album[];
+  loading: boolean;
+  error: string | null;
+}
+
+const initialState: AlbumState = {
+  data: [],
+  loading: false,
+  error: null,
+};
+
+const albumReducer = createReducer(initialState, (builder) => {
+  builder
+    .addCase(fetchAlbumsRequest, (state) => {
       state.loading = true;
-    },
-    fetchAlbumsSuccess: (state, action) => {
+      state.error = null;
+    })
+    .addCase(fetchAlbumsSuccess, (state, action) => {
       state.loading = false;
       state.data = action.payload;
-      state.error = null;
-    },
-    fetchAlbumsFailure: (state, action) => {
+    })
+    .addCase(fetchAlbumsFailure, (state, action) => {
       state.loading = false;
       state.error = action.payload;
-    },
-  },
+    });
 });
 
-export const { fetchAlbumsRequest, fetchAlbumsSuccess, fetchAlbumsFailure } =
-  albumSlice.actions;
-export default albumSlice.reducer;
+export default albumReducer;

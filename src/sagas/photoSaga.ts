@@ -1,24 +1,26 @@
-import { call, put, takeLatest } from "redux-saga/effects";
-import axios from "axios";
+import { call, put, takeLatest, all } from "redux-saga/effects";
 import {
-  fetchPhotosRequest,
   fetchPhotosSuccess,
   fetchPhotosFailure,
 } from "../actions/photoActions";
+import { FETCH_PHOTOS_REQUEST } from "../constants/actionTypes";
+import { fetchPhotos } from "../services/api";
 
-function* fetchPhotos(action: any): Generator<any, any, any> {
-  const albumId = action.payload;
+function* fetchPhotosSaga(action: {
+  payload: number;
+}): Generator<any, void, any> {
   try {
-    const response = yield call(
-      axios.get,
-      `https://jsonplaceholder.typicode.com/photos?albumId=${albumId}`
-    );
-    yield put(fetchPhotosSuccess(response.data));
-  } catch (error) {
-    yield put(fetchPhotosFailure(error));
+    const response = yield call(fetchPhotos, action.payload);
+    yield put(fetchPhotosSuccess(response));
+  } catch (error: any) {
+    yield put(fetchPhotosFailure(error.message));
   }
 }
 
 export function* watchFetchPhotos() {
-  yield takeLatest(fetchPhotosRequest().type, fetchPhotos);
+  yield takeLatest(FETCH_PHOTOS_REQUEST, fetchPhotosSaga);
+}
+
+export default function* photoSaga() {
+  yield all([watchFetchPhotos()]);
 }

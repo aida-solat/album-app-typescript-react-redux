@@ -1,28 +1,37 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createReducer } from "@reduxjs/toolkit";
+import {
+  fetchPhotosRequest,
+  fetchPhotosSuccess,
+  fetchPhotosFailure,
+} from "../actions/photoActions";
+import { Photo } from "../types";
 
-const photoSlice = createSlice({
-  name: "photos",
-  initialState: {
-    data: [],
-    loading: false,
-    error: null,
-  },
-  reducers: {
-    fetchPhotosRequest: (state) => {
+export interface PhotoState {
+  data: Photo[];
+  loading: boolean;
+  error: string | null;
+}
+
+const initialState: PhotoState = {
+  data: [],
+  loading: false,
+  error: null,
+};
+
+const photoReducer = createReducer(initialState, (builder) => {
+  builder
+    .addCase(fetchPhotosRequest, (state) => {
       state.loading = true;
-    },
-    fetchPhotosSuccess: (state, action) => {
+      state.error = null;
+    })
+    .addCase(fetchPhotosSuccess, (state, action) => {
       state.loading = false;
       state.data = action.payload;
-      state.error = null;
-    },
-    fetchPhotosFailure: (state, action) => {
+    })
+    .addCase(fetchPhotosFailure, (state, action) => {
       state.loading = false;
       state.error = action.payload;
-    },
-  },
+    });
 });
 
-export const { fetchPhotosRequest, fetchPhotosSuccess, fetchPhotosFailure } =
-  photoSlice.actions;
-export default photoSlice.reducer;
+export default photoReducer;

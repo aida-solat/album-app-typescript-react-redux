@@ -1,23 +1,24 @@
-import { call, put, takeLatest } from "redux-saga/effects";
-import axios from "axios";
+import { put, takeLatest, all } from "redux-saga/effects";
 import {
-  fetchAlbumsRequest,
   fetchAlbumsSuccess,
   fetchAlbumsFailure,
 } from "../actions/albumActions";
+import { FETCH_ALBUMS_REQUEST } from "../constants/actionTypes";
+import { fetchAlbums } from "../services/api";
 
-function* fetchAlbums(): Generator<any, any, any> {
+function* fetchAlbumsSaga(): Generator<any, void, any> {
   try {
-    const response = yield call(
-      axios.get,
-      "https://jsonplaceholder.typicode.com/albums"
-    );
-    yield put(fetchAlbumsSuccess(response.data));
-  } catch (error) {
-    yield put(fetchAlbumsFailure(error));
+    const response = yield fetchAlbums();
+    yield put(fetchAlbumsSuccess(response));
+  } catch (e: any) {
+    yield put(fetchAlbumsFailure(e.message));
   }
 }
 
 export function* watchFetchAlbums() {
-  yield takeLatest(fetchAlbumsRequest().type, fetchAlbums);
+  yield takeLatest(FETCH_ALBUMS_REQUEST, fetchAlbumsSaga);
+}
+
+export default function* albumSaga() {
+  yield all([watchFetchAlbums()]);
 }
