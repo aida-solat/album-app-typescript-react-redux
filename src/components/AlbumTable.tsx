@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAlbumsRequest } from "../actions/albumActions";
+import { Link } from "react-router-dom";
 
 const AlbumTable: React.FC = () => {
   const dispatch = useDispatch();
@@ -34,8 +35,8 @@ const AlbumTable: React.FC = () => {
   }
 
   return (
-    <div>
-      <h1>Albums</h1>
+    <div className='flex flex-col'>
+      <h1 className='text-3xl font-bold mb-4'>Albums</h1>
       <div className='mb-4 flex items-center'>
         <label htmlFor='userIdFilter' className='mr-2'>
           Filter by User:
@@ -45,7 +46,7 @@ const AlbumTable: React.FC = () => {
           name='userIdFilter'
           value={userId || ""}
           onChange={handleFilterChange}
-          className='border rounded px-2 py-1'
+          className='border border-gray-400 rounded px-2 py-1'
         >
           <option value=''>All</option>
           {Array.from(Array(10).keys()).map((num) => (
@@ -55,12 +56,12 @@ const AlbumTable: React.FC = () => {
           ))}
         </select>
       </div>
-      <table className='table-auto'>
+      <table className='table-auto border-collapse border border-gray-400'>
         <thead>
           <tr>
-            <th>User ID</th>
-            <th>Album ID</th>
-            <th>Title</th>
+            <th className='border border-gray-400 px-4 py-2'>User ID</th>
+            <th className='border border-gray-400 px-4 py-2'>Album ID</th>
+            <th className='border border-gray-400 px-4 py-2'>Title</th>
           </tr>
         </thead>
         <tbody>
@@ -72,7 +73,7 @@ const AlbumTable: React.FC = () => {
               <td>{album.id}</td>
               <td>{album.title}</td>
               <td>
-                <a href={`/album/${album.id}`}>View Photos</a>
+                <Link to={`/album/${album.id}`}>View Photos</Link>
               </td>
             </tr>
           ))}
