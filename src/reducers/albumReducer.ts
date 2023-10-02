@@ -26,11 +26,11 @@ const albumReducer = createReducer(initialState, (builder) => {
     })
     .addCase(fetchAlbumsSuccess, (state, action) => {
       state.loading = false;
-      state.data = action.payload;
+      if (action.payload) state.data = action.payload;
     })
     .addCase(fetchAlbumsFailure, (state, action) => {
       state.loading = false;
-      state.error = action.payload;
+      if (action.payload) state.error = action.payload;
     });
 });
 

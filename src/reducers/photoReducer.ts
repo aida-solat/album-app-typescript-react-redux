@@ -5,6 +5,7 @@ import {
   fetchPhotosFailure,
 } from "../actions/photoActions";
 import { Photo } from "../types";
+import { act } from "react-dom/test-utils";
 
 export interface PhotoState {
   data: Photo[];
@@ -26,11 +27,11 @@ const photoReducer = createReducer(initialState, (builder) => {
     })
     .addCase(fetchPhotosSuccess, (state, action) => {
       state.loading = false;
-      state.data = action.payload;
+      if (action.payload) state.data = action.payload;
     })
     .addCase(fetchPhotosFailure, (state, action) => {
       state.loading = false;
-      state.error = action.payload;
+      if (action.payload) state.error = action.payload;
     });
 });
 

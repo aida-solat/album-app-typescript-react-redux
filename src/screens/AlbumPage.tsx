@@ -1,9 +1,10 @@
-import AlbumList from "../components/AlbumList";
+import React from "react";
+import AlbumTable from "../components/AlbumTable";
 
-const AlbumPage = () => {
+const AlbumPage: React.FC = () => {
   return (
     <div>
-      <AlbumList />
+      <AlbumTable />
     </div>
   );
 };

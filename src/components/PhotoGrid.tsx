@@ -24,21 +24,13 @@ const PhotoGrid: React.FC = () => {
     return <div>Error: {error}</div>;
   }
 
-  const filteredPhotos = photos.filter(
-    (photo: any) => photo.albumId === Number(albumId)
-  );
-
   return (
     <div>
       <h1>Photos for Album {albumId}</h1>
       <div className='grid grid-cols-3 gap-4'>
-        {filteredPhotos.map((photo: any) => (
+        {photos.map((photo: any) => (
           <div key={photo.id}>
-            <img
-              src={photo.thumbnailUrl}
-              alt={photo.title}
-              className='w-full h-auto'
-            />
+            <img src={photo.thumbnailUrl} alt={photo.title} />
           </div>
         ))}
       </div>

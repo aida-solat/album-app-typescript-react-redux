@@ -1,19 +1,16 @@
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { fetchAlbumsRequest } from "./actions/albumActions";
-import Routing from "./routing";
+import React from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import AlbumPage from "./screens/AlbumPage";
+import PhotoPage from "./screens/PhotoPage";
 
-const App = () => {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(fetchAlbumsRequest());
-  }, [dispatch]);
-
+const App: React.FC = () => {
   return (
-    <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
-      <Routing />
-    </div>
+    <Router>
+      <Routes>
+        <Route path='/album/:albumId/*' element={<PhotoPage />} />
+        <Route path='/album/*' element={<AlbumPage />} />
+      </Routes>
+    </Router>
   );
 };
 

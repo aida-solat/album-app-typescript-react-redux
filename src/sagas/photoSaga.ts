@@ -7,6 +7,7 @@ import { FETCH_PHOTOS_REQUEST } from "../constants/actionTypes";
 import { fetchPhotos } from "../services/api";
 
 function* fetchPhotosSaga(action: {
+  type: string;
   payload: number;
 }): Generator<any, void, any> {
   try {

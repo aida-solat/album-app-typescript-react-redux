@@ -1,14 +1,8 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAlbumsRequest } from "../actions/albumActions";
-import { Album } from "../types";
-import { Link } from "react-router-dom";
 
-interface Props {
-  albums: Album[];
-}
-
-const AlbumTable: React.FC<Props> = () => {
+const AlbumTable: React.FC = () => {
   const dispatch = useDispatch();
   const {
     data: albums,
@@ -29,24 +23,30 @@ const AlbumTable: React.FC<Props> = () => {
   }
 
   return (
-    <table className='  '>
-      <thead className=''>
-        <tr className=''>
-          <th>ID</th>
-          <th>Title</th>
-          <th>User ID</th>
-        </tr>
-      </thead>
-      <tbody className=''>
-        {albums.map((album: Album) => (
-          <tr key={album.id}>
-            <td>{album.id}</td>
-            <Link to={`/albums/${album.id}`}>{album.title}</Link>
-            <td>{album.userId}</td>
+    <div>
+      <h1>Albums</h1>
+      <table className='table-auto'>
+        <thead>
+          <tr>
+            <th>User ID</th>
+            <th>Album ID</th>
+            <th>Title</th>
           </tr>
-        ))}
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          {albums.map((album: any) => (
+            <tr key={album.id}>
+              <td>{album.userId}</td>
+              <td>{album.id}</td>
+              <td>{album.title}</td>
+              <td>
+                <a href={`/album/${album.id}`}>View Photos</a>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   );
 };
 
