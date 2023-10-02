@@ -3,7 +3,7 @@ import AlbumTable from "../components/AlbumTable";
 
 const AlbumPage: React.FC = () => {
   return (
-    <div>
+    <div className='flex flex-col items-center'>
       <AlbumTable />
     </div>
   );
