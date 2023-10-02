@@ -7,8 +7,8 @@ const Routing: React.FC = () => {
   return (
     <Router>
       <Routes>
-        <Route path='/' element={<AlbumPage />} />
-        <Route path='/album/:albumId' element={<PhotoPage />} />
+        <Route path='/albums/:albumId/*' element={<PhotoPage />} />
+        <Route path='/albums/*' element={<AlbumPage />} />
       </Routes>
     </Router>
   );
