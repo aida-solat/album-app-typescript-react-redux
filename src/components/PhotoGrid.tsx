@@ -1,3 +1,7 @@
+/**
+ * Renders a grid of photos for a specific album.
+ * @returns A React functional component.
+ */
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";

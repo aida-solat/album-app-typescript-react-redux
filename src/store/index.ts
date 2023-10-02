@@ -1,4 +1,9 @@
-// src/store/index.ts
+/**
+ *
+ * This file exports a Redux store instance that is configured with reducers and middleware.
+ *
+ * @packageDocumentation
+ */
 
 import { configureStore } from "@reduxjs/toolkit";
 import { combineReducers } from "redux";
@@ -11,17 +16,29 @@ import photoSaga from "../sagas/photoSaga";
 
 const sagaMiddleware = createSagaMiddleware();
 
+/**
+ * The root reducer that combines all reducers used in the store.
+ */
 export const rootReducer = combineReducers({
   albums: albumReducer,
   photos: photoReducer,
 });
 
+/**
+ * The type of the root state of the store.
+ */
 export type RootState = ReturnType<typeof rootReducer>;
 
+/**
+ * The root saga that combines all sagas used in the store.
+ */
 function* rootSaga() {
   yield all([albumSaga(), photoSaga()]);
 }
 
+/**
+ * The Redux store instance that is configured with the root reducer and middleware.
+ */
 const store = configureStore({
   reducer: rootReducer,
   middleware: [sagaMiddleware],

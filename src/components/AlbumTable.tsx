@@ -1,3 +1,6 @@
+/**
+ * Renders a table of albums with the ability to filter by user ID and view photos for each album.
+ */
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAlbumsRequest } from "../actions/albumActions";

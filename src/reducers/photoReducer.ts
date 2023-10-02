@@ -1,3 +1,7 @@
+/**
+ * This module contains the Redux reducer for the photo state.
+ */
+
 import { createReducer } from "@reduxjs/toolkit";
 import {
   fetchPhotosRequest,
@@ -5,11 +9,19 @@ import {
   fetchPhotosFailure,
 } from "../actions/photoActions";
 import { Photo } from "../types";
-import { act } from "react-dom/test-utils";
 
 export interface PhotoState {
+  /**
+   * An array of Photo objects representing the photos in the state.
+   */
   data: Photo[];
+  /**
+   * A boolean indicating whether the state is currently being loaded.
+   */
   loading: boolean;
+  /**
+   * A string representing the error message if an error occurred while loading the state.
+   */
   error: string | null;
 }
 

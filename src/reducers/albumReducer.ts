@@ -1,3 +1,7 @@
+/**
+ * This file exports a reducer function for managing the state of albums in the Redux store.
+ * @packageDocumentation
+ */
 import { createReducer } from "@reduxjs/toolkit";
 import {
   fetchAlbumsRequest,

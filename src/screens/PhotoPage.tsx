@@ -1,3 +1,7 @@
+/**
+ * Renders the PhotoPage component.
+ * @returns JSX.Element
+ */
 import React from "react";
 import PhotoGrid from "../components/PhotoGrid";
 
