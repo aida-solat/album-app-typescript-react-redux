@@ -25,9 +25,11 @@ const PhotoGrid: React.FC = () => {
   }
 
   return (
-    <div className='flex flex-col'>
-      <h1 className='text-3xl font-bold mb-4'>Photos For Album {albumId}</h1>
-      <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4'>
+    <div className='flex flex-col p-4'>
+      <h1 className='text-3xl font-bold flex flex-col items-center mb-4'>
+        Photos For Album {albumId}
+      </h1>
+      <div className='grid grid-cols-4 md:grid-cols-3 lg:grid-cols-4 gap-4'>
         {photos.map((photo: any) => (
           <div
             key={photo.id}
